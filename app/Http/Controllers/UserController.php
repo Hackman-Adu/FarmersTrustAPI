@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Exception;
+use App\Http\Resources\UserResource;
 use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -81,6 +82,18 @@ class UserController extends Controller
     public function getAll()
     {
 
-        return User::all();
+        $users = User::all();
+        return UserResource::collection($users);
+    }
+
+    public function view($id)
+    {
+
+        $user = User::find($id);
+        if ($user) {
+            return response()->json(['response' => "successful", "user" => new UserResource($user)]);
+        } else {
+            return response()->json(['response' => "user not found", "user" => null]);
+        }
     }
 }

@@ -19,7 +19,7 @@ class User extends Model
         "image"
     ];
     protected $hidden = [
-        "user_password"
+        "user_password",
     ];
 
     public function ads()
