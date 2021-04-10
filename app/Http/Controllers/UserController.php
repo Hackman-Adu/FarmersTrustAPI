@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Exception;
 use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use function GuzzleHttp\Psr7\hash;
-use PHPUnit\Framework\Constraint\Exception;
 
 class UserController extends Controller
 {
@@ -26,7 +26,6 @@ class UserController extends Controller
             if ($user->save()) {
                 return response()->json(['response' => "successful", "user" => $user]);
             } else {
-                throw Exception();
             }
         }
     }
@@ -57,7 +56,6 @@ class UserController extends Controller
             if ($user->save()) {
                 return response()->json(["response" => "successful", "user" => $user]);
             } else {
-                throw Exception();
             }
         } else {
             return response()->json(["response" => "incorrect password", "user" => null],);

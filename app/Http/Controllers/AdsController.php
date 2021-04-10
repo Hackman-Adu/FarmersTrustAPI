@@ -32,7 +32,7 @@ class AdsController extends Controller
         $ad->negotiable = $request->input("negotiable");
         $ad->datePosted = $request->input("datePosted");
         if ($ad->save()) {
-            return response()->json(['response' => "successful", "ad" => $ad]);
+            return response()->json(['response' => "successful", "ad" => new AdResources($ad)]);
         }
     }
 }

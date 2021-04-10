@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CartResource extends JsonResource
+class ReviewResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,6 +14,11 @@ class CartResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [];
+        return [
+            "user" => $this->user,
+            "review" => $this->review,
+            "date" => $this->datePosted
+
+        ];
     }
 }

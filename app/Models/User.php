@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Ads;
@@ -23,6 +24,6 @@ class User extends Model
 
     public function ads()
     {
-        return $this->hasMany(Ads::class);
+        return $this->hasMany(Ads::class, "user_id");
     }
 }

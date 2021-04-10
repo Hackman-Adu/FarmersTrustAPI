@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 //routes for user
 Route::get("/users", [UserController::class, "getAll"]);
-Route::post("/user/create", [UserController::class, "create"]);
+Route::post("/user", [UserController::class, "create"]);
 Route::post("/user/login", [UserController::class, "login"]);
 Route::put("/user/reset/{id}/{oldPassword}/{newPassword}", [UserController::class, "reset"]);
 Route::put("/user/edit/{id}", [UserController::class, "editProfile"]);
@@ -38,4 +39,7 @@ Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad/create", [AdsController::class, "create"]);
 
 //ad images
-Route::post("/ad/images/create", [ImagesController::class, "create"]);
+Route::post("/ad/images", [ImagesController::class, "create"]);
+
+//review
+Route::post("/review", [ReviewController::class, "create"]);

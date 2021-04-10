@@ -2,10 +2,9 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CartResource extends JsonResource
+class ImagesResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,6 +14,8 @@ class CartResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [];
+        return [
+            new AdResources($this->ad),
+        ];
     }
 }

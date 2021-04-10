@@ -23,6 +23,7 @@ class CreateAdsTable extends Migration
             $table->string("description");
             $table->string("negotiable");
             $table->string("datePosted");
+            $table->string("approved")->default("0");
         });
     }
 

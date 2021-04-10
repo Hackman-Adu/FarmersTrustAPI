@@ -19,7 +19,7 @@ class CartController extends Controller
         $cart->user_id = $request->input("user_id");
         $cart->ad_id = $request->input("ad_id");
         if ($cart->save()) {
-            return response()->json(['response' => "successful", "ads" => $cart]);
+            return response()->json(['response' => "successful", "ads" => new CartResource($cart)]);
         }
     }
 }

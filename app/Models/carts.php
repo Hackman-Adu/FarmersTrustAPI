@@ -16,18 +16,4 @@ class carts extends Model
         "user_id",
         "ad_id",
     ];
-
-    public function ads()
-    {
-        return $this->belongsTo(Ads::class, "user_id");
-    }
-    public function user()
-    {
-        return $this->belongsTo(User::class, "id");
-    }
-
-    public function images()
-    {
-        return $this->hasMany(Images::class, "user_id");
-    }
 }

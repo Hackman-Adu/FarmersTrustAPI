@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\User;
 use App\Models\Images;
+use App\Models\reviews;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,10 +25,14 @@ class Ads extends Model
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, "user_id");
+        return $this->belongsTo(User::class);
     }
     public function images()
     {
         return $this->hasMany(Images::class, "ad_id");
+    }
+    public function reviews()
+    {
+        return $this->hasMany(reviews::class, "ad_id");
     }
 }

@@ -23,8 +23,10 @@ class AdResources extends JsonResource
             "description" => $this->description,
             "negotiable" => $this->negotiable,
             "datePosted" => $this->datePosted,
+            "approved" => $this->approved,
             "user" => $this->user,
             "images" => $this->images,
+            "reviews" => ReviewResource::collection($this->reviews)
         ];
     }
 }
