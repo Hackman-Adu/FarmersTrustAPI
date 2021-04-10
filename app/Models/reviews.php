@@ -16,6 +16,7 @@ class reviews extends Model
         "user_id",
         "ad_id",
         "review",
+        "num_stars",
         "datePosted"
     ];
 

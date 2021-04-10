@@ -36,7 +36,7 @@ Route::post("/cart", [CartController::class, "create"]);
 //routes for ads
 Route::get("/ads", [AdsController::class, "all"]);
 Route::get("/ads/{id}", [AdsController::class, "view"]);
-Route::post("/ad/create", [AdsController::class, "create"]);
+Route::post("/ad", [AdsController::class, "create"]);
 
 //ad images
 Route::post("/ad/images", [ImagesController::class, "create"]);

@@ -18,6 +18,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("ad_id");
             $table->string("review");
+            $table->unsignedBigInteger("num_stars");
             $table->string("datePosted");
         });
     }
