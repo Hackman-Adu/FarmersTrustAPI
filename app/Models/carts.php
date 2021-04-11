@@ -16,4 +16,9 @@ class carts extends Model
         "user_id",
         "ad_id",
     ];
+
+    public function ad()
+    {
+        return $this->belongsTo(Ads::class, "ad_id");
+    }
 }

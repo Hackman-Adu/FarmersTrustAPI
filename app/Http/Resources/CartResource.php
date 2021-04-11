@@ -15,6 +15,11 @@ class CartResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [];
+        return [
+            "id" => $this->id,
+            "user_id" => $this->user_id,
+            "ad" => new AdResources($this->ad)
+
+        ];
     }
 }

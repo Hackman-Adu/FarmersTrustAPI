@@ -31,8 +31,10 @@ Route::post("/user/login", [UserController::class, "login"]);
 Route::put("/user/reset/{id}/{oldPassword}/{newPassword}", [UserController::class, "reset"]);
 Route::put("/user/edit/{id}", [UserController::class, "editProfile"]);
 
-Route::get("/cart/{id}", [CartController::class, "view"]);
+Route::get("/carts/{id}", [CartController::class, "view"]);
+Route::get("/carts", [CartController::class, "all"]);
 Route::post("/cart", [CartController::class, "create"]);
+Route::delete("/cart/{id}", [CartController::class, "delete"]);
 
 //routes for ads
 Route::get("/ads", [AdsController::class, "all"]);
