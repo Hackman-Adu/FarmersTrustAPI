@@ -20,4 +20,9 @@ class ReviewController extends Controller
             return response()->json(["response" => "successful", "review" => new ReviewResource($newReview)]);
         }
     }
+    public function all($id)
+    {
+        $reviews = reviews::all()->where("ad_id", "=", $id);
+        return response()->json(["response" => "successful", "reviews" => ReviewResource::collection($reviews)]);
+    }
 }

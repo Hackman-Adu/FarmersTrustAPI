@@ -44,3 +44,4 @@ Route::post("/ad/images", [ImagesController::class, "create"]);
 
 //review
 Route::post("/review", [ReviewController::class, "create"]);
+Route::get("/reviews/{id}", [ReviewController::class, "all"]);
