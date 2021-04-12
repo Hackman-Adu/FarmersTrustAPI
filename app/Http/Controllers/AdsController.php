@@ -11,7 +11,7 @@ class AdsController extends Controller
 {
     public function all()
     {
-        $ads = Ads::all();
+        $ads = Ads::where('approved', '0')->get();
         return response()->json(["response" => "successful", "ads" => AdResources::collection($ads)]);
     }
 
