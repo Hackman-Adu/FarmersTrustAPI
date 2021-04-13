@@ -17,6 +17,9 @@ class CreateImagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger("ad_id");
             $table->string("imageUrl");
+            $table->foreign('ad_id')
+                ->references('id')->on('ads')
+                ->onDelete('cascade');
         });
     }
 

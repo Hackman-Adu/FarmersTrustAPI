@@ -40,11 +40,13 @@ Route::delete("/cart/{id}", [CartController::class, "delete"]);
 Route::get("/ads", [AdsController::class, "all"]);
 Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad", [AdsController::class, "create"]);
+Route::delete("/ad/{id}", [AdsController::class, "delete"]);
 
 //ad images
 Route::post("/ad/images", [ImagesController::class, "create"]);
 
 //review
 Route::post("/review", [ReviewController::class, "create"]);
+Route::get("/reviews", [ReviewController::class, "reviews"]);
 Route::delete("/review/{id}", [ReviewController::class, "delete"]);
 Route::get("/reviews/{id}", [ReviewController::class, "all"]);

@@ -12,7 +12,7 @@ class CartController extends Controller
     public function view($id)
     {
 
-        $cartItems = carts::all()->where("user_id", "=", $id);
+        $cartItems = carts::where("user_id", "=", $id)->orderBy("id", "DESC")->get();
         return response()->json(["response" => "successful", "items" => CartResource::collection($cartItems)]);
     }
     public function create(Request $request)

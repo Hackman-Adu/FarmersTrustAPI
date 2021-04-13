@@ -23,7 +23,12 @@ class ReviewController extends Controller
 
     public function all($id)
     {
-        $reviews = reviews::all()->where("ad_id", "=", $id);
+        $reviews = reviews::where("ad_id", "=", $id)->orderBy("id", "DESC")->get();
+        return response()->json(["response" => "successful", "reviews" => ReviewResource::collection($reviews)]);
+    }
+    public function reviews()
+    {
+        $reviews = reviews::all();
         return response()->json(["response" => "successful", "reviews" => ReviewResource::collection($reviews)]);
     }
 

@@ -28,7 +28,7 @@ class AdResources extends JsonResource
             "number_reviews" => $this->reviews->count(),
             "average_stars" => ceil($this->reviews->avg("num_stars")),
             "images" => $this->images,
-            "reviews" => ReviewResource::collection($this->reviews)
+            // "reviews" => ReviewResource::collection($this->reviews)
         ];
     }
 }

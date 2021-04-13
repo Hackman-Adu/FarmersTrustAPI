@@ -20,6 +20,9 @@ class CreateReviewsTable extends Migration
             $table->string("review");
             $table->unsignedBigInteger("num_stars");
             $table->string("datePosted");
+            $table->foreign('ad_id')
+                ->references('id')->on('ads')
+                ->onDelete('cascade');
         });
     }
 
