@@ -7,6 +7,7 @@ use App\Models\Ads;
 use Illuminate\Http\Request;
 use App\Http\Resources\AdResources;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class AdsController extends Controller
 {
@@ -23,18 +24,24 @@ class AdsController extends Controller
     }
     public function create(Request $request)
     {
-        $ad = new Ads();
-        $ad->user_id = $request->input("user_id");
-        $ad->productCategory = $request->input("productCategory");
-        $ad->productName = $request->input("productName");
-        $ad->price = $request->input("price");
-        $ad->location = $request->input("location");
-        $ad->description = $request->input("description");
-        $ad->negotiable = $request->input("negotiable");
-        $ad->datePosted = $request->input("datePosted");
-        if ($ad->save()) {
-            return response()->json(['response' => "successful", "ad" => new AdResources($ad)]);
+        try {
+            Log::info('ads requests', [$request->all()]);
+            $ads = Ads::create($request->all());
+            if ($ads) {
+                return response()->json(['response' => "successful", "ad" => new AdResources($ads)]);
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::error('an error occurred in creating ads', [$th]);
         }
+    }
+    public function update(Request $request, $id)
+    {
+        $ad = Ads::find($id);
+        $inputs = $request->all();
+        if ($ad->fill($inputs)->save()) {
+            return "updated";
+        };
     }
     public function delete($id)
     {
