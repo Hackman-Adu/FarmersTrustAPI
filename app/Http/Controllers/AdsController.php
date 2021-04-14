@@ -13,8 +13,9 @@ class AdsController extends Controller
 {
     public function all()
     {
-        $ads = Ads::where('approved', '0')->orderBy("id", "DESC")->get();
-        return response()->json(["response" => "successful", "ads" => AdResources::collection($ads)]);
+        $ads = Ads::where('approved', '0')->orderBy("id", "DESC")->paginate(5);
+        return AdResources::collection($ads);
+        // return response()->json(["response" => "successful", "ads" => AdResources::collection($ads)]);
     }
 
     public function view($id)
