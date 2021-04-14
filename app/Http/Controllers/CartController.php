@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\carts;
 use App\Http\Resources\CartResource;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -29,6 +30,17 @@ class CartController extends Controller
         $cart = carts::find($id);
         if ($cart->delete()) {
             return "item deleted";
+        }
+    }
+    public function deleteAll($userID)
+    {
+        try {
+            $carts = carts::where("user_id", "=", $userID)->delete();
+            if ($carts) {
+                return "items deleted";
+            }
+        } catch (\Throwable $th) {
+            Log::error("error occurred in deleting all cart items", [$th]);
         }
     }
     public function all()

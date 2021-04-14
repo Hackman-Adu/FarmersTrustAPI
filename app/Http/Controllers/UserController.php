@@ -8,26 +8,32 @@ use \App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+
 use function GuzzleHttp\Psr7\hash;
 
 class UserController extends Controller
 {
     public function create(Request $request)
     {
-        $user = User::select('*')->where('email', $request->input('email'))->first();
-        if ($user) {
-            return response()->json(['response' => "account exists", "user" => $user]);
-        } else {
-            $user = new User();
-            $user->fullname = $request->input("fullname");
-            $user->email = $request->input("email");
-            $user->phone = $request->input("phone");
-            $user->user_password = Hash::make($request->input("password"));
-            $user->image = $request->input("image");
-            if ($user->save()) {
-                return response()->json(['response' => "successful", "user" => $user]);
+        try {
+            $user = User::select('*')->where('email', $request->input('email'))->first();
+            if ($user) {
+                return response()->json(['response' => "account exists", "user" => $user]);
             } else {
+                $user = new User();
+                $user->fullname = $request->input("fullname");
+                $user->email = $request->input("email");
+                $user->phone = $request->input("phone");
+                $user->user_password = Hash::make($request->input("password"));
+                $user->image = $request->input("image");
+                if ($user->save()) {
+                    return response()->json(['response' => "successful", "user" => $user]);
+                } else {
+                }
             }
+        } catch (\Throwable $th) {
+            Log::error("creating account", [$th]);
         }
     }
 
@@ -89,11 +95,15 @@ class UserController extends Controller
     public function view($id)
     {
 
-        $user = User::find($id);
-        if ($user) {
-            return response()->json(['response' => "successful", "user" => new UserResource($user)]);
-        } else {
-            return response()->json(['response' => "user not found", "user" => null]);
+        try {
+            $user = User::find($id);
+            if ($user) {
+                return response()->json(['response' => "successful", "user" => new UserResource($user)]);
+            } else {
+                return response()->json(['response' => "user not found", "user" => null]);
+            }
+        } catch (\Throwable $th) {
+            Log::error("creating account", [$th]);
         }
     }
 }
