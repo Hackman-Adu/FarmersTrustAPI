@@ -58,3 +58,4 @@ Route::get("/reviews/{id}", [ReviewController::class, "all"]);
 //followers
 Route::get("/followings/{id}", [FollowersController::class, "followings"]);
 Route::get("/followers/{id}", [FollowersController::class, "followers"]);
+Route::delete("/unfollow/{userID}/{followerID}", [FollowersController::class, "unFollow"]);

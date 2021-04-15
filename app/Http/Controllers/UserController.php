@@ -30,7 +30,8 @@ class UserController extends Controller
                 $user->image = $request->input("image");
                 if ($user->save()) {
                     return response()->json(['response' => "successful", "user" => $user]);
-                } else { }
+                } else {
+                }
             }
         } catch (\Throwable $th) {
             Log::error("creating account", [$th]);
@@ -62,7 +63,8 @@ class UserController extends Controller
             $user->user_password = Hash::make($newPassword);
             if ($user->save()) {
                 return response()->json(["response" => "successful", "user" => $user]);
-            } else { }
+            } else {
+            }
         } else {
             return response()->json(["response" => "incorrect password", "user" => null],);
         }
