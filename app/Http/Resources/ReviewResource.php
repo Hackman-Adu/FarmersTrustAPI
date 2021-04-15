@@ -20,7 +20,6 @@ class ReviewResource extends JsonResource
             "review" => $this->review,
             "num_stars" => $this->num_stars,
             "date" => $this->datePosted,
-            // "ad" => $this->ad
 
         ];
     }

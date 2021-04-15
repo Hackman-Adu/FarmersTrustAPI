@@ -7,6 +7,7 @@ use App\Http\Controllers\AdsController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\FollowersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,7 @@ Route::post("/review", [ReviewController::class, "create"]);
 Route::get("/reviews", [ReviewController::class, "reviews"]);
 Route::delete("/review/{id}", [ReviewController::class, "delete"]);
 Route::get("/reviews/{id}", [ReviewController::class, "all"]);
+
+//followers
+Route::get("/followings/{id}", [FollowersController::class, "followings"]);
+Route::get("/followers/{id}", [FollowersController::class, "followers"]);

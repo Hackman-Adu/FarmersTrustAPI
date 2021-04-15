@@ -14,6 +14,7 @@ use function GuzzleHttp\Psr7\hash;
 
 class UserController extends Controller
 {
+
     public function create(Request $request)
     {
         try {
@@ -29,8 +30,7 @@ class UserController extends Controller
                 $user->image = $request->input("image");
                 if ($user->save()) {
                     return response()->json(['response' => "successful", "user" => $user]);
-                } else {
-                }
+                } else { }
             }
         } catch (\Throwable $th) {
             Log::error("creating account", [$th]);
@@ -44,12 +44,12 @@ class UserController extends Controller
         $user = User::select("*")->where("email", $email)->first();
         if ($user) {
             if (Hash::check($password, $user->user_password)) {
-                return response()->json(["response" => "successful", "user" => $user]);
+                return response()->json(["response" => "successful", "user" => new UserResource($user)]);
             } else {
-                return response()->json(["response" => "wrong credentials", "user" => $user]);
+                return response()->json(["response" => "wrong credentials", "user" =>  new UserResource($user)]);
             }
         } else {
-            return response()->json(["response" => "wrong credentials", "user" => $user]);
+            return response()->json(["response" => "wrong credentials", "user" =>  new UserResource($user)]);
         }
     }
 
@@ -62,8 +62,7 @@ class UserController extends Controller
             $user->user_password = Hash::make($newPassword);
             if ($user->save()) {
                 return response()->json(["response" => "successful", "user" => $user]);
-            } else {
-            }
+            } else { }
         } else {
             return response()->json(["response" => "incorrect password", "user" => null],);
         }
@@ -78,16 +77,15 @@ class UserController extends Controller
             $user->image = $request->input("image");
 
             if ($user->save()) {
-                return response()->json(["response" => "successful", "user" => $user]);
+                return response()->json(["response" => "successful", "user" => new UserResource($user)]);
             }
         } else {
-            return response()->json(["response" => "user not found", "user" => $user]);
+            return response()->json(["response" => "user not found", "user" => null]);
         }
     }
 
     public function getAll()
     {
-
         $users = User::all();
         return UserResource::collection($users);
     }

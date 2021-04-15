@@ -29,7 +29,6 @@ class reviews extends Model
     {
         return $this->belongsTo(User::class);
     }
-
     public function ad()
     {
         return $this->belongsTo(Ads::class);

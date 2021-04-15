@@ -15,11 +15,13 @@ class UserResource extends JsonResource
     public function toArray($request)
     {
         return [
+            "id" => $this->id,
             "fullname" => $this->fullname,
             "email" => $this->email,
             "phone" => $this->phone,
             "image" => $this->image,
-            "ads" => AdResources::collection($this->ads)
+            "followersCount" => $this->followers->count(),
+            "followingsCount" => $this->followings->count()
         ];
     }
 }
