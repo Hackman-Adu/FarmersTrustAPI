@@ -24,7 +24,7 @@ class User extends Model
 
     public function ads()
     {
-        return $this->hasMany(Ads::class, "user_id");
+        return $this->hasMany(Ads::class, "user_id")->orderBy("id", "DESC");
     }
 
     public function followers()

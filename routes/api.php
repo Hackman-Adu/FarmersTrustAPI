@@ -27,6 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //routes for user
 Route::get("/users", [UserController::class, "getAll"]);
 Route::get("/user/{id}", [UserController::class, "view"]);
+Route::get("/user/profile/{id}", [UserController::class, "viewProfile"]);
 Route::post("/user", [UserController::class, "create"]);
 Route::post("/user/login", [UserController::class, "login"]);
 Route::put("/user/reset/{id}/{oldPassword}/{newPassword}", [UserController::class, "reset"]);

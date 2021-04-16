@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
 use function GuzzleHttp\Psr7\hash;
+use App\Http\Resources\UserProfileResources;
 
 class UserController extends Controller
 {
@@ -30,8 +31,7 @@ class UserController extends Controller
                 $user->image = $request->input("image");
                 if ($user->save()) {
                     return response()->json(['response' => "successful", "user" => $user]);
-                } else {
-                }
+                } else { }
             }
         } catch (\Throwable $th) {
             Log::error("creating account", [$th]);
@@ -63,8 +63,7 @@ class UserController extends Controller
             $user->user_password = Hash::make($newPassword);
             if ($user->save()) {
                 return response()->json(["response" => "successful", "user" => $user]);
-            } else {
-            }
+            } else { }
         } else {
             return response()->json(["response" => "incorrect password", "user" => null],);
         }
@@ -92,9 +91,22 @@ class UserController extends Controller
         return UserResource::collection($users);
     }
 
+    public function viewProfile($id)
+    {
+        try {
+            $user = User::find($id);
+            if ($user) {
+                return response()->json(['response' => "successful", "data" => new UserProfileResources($user)]);
+            } else {
+                return response()->json(['response' => "user not found", "data" => null]);
+            }
+        } catch (\Throwable $th) {
+            Log::error("creating account", [$th]);
+        }
+    }
+
     public function view($id)
     {
-
         try {
             $user = User::find($id);
             if ($user) {
