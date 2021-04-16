@@ -26,11 +26,11 @@ class AdsController extends Controller
     }
 
     //getting a particular ad from a particular user
-    public function getAd($id)
-    {
-        $ad = Ads::find($id);
-        return response()->json(["response" => "successful", "ad" => new AdResources($ad)]);
-    }
+    // public function getAd($id)
+    // {
+    //     $ad = Ads::find($id);
+    //     return response()->json(["response" => "successful", "ad" => new AdResources($ad)]);
+    // }
 
     //creating new user ad
     public function create(Request $request)

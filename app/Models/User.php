@@ -24,7 +24,12 @@ class User extends Model
 
     public function ads()
     {
-        return $this->hasMany(Ads::class, "user_id")->orderBy("id", "DESC");
+        return $this->hasMany(Ads::class, "user_id")->orderBy("id", "DESC")->limit(10);
+    }
+    //for counting the number of ads for a particular user
+    public function countAds()
+    {
+        return $this->hasMany(Ads::class, "user_id");
     }
 
     public function followers()
