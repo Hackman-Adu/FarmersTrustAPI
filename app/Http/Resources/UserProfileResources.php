@@ -23,7 +23,6 @@ class UserProfileResources extends JsonResource
             "followersCount" => $this->followers->count(),
             "followingsCount" => $this->followings->count(),
             "adsCount" => $this->countAds->count(),
-            // "followers" => $this->followers,
             "ads" => AdResources::collection($this->ads)
         ];
     }
