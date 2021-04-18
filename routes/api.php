@@ -41,7 +41,7 @@ Route::delete("/carts/{id}", [CartController::class, "deleteAll"]);
 
 //routes for ads
 Route::get("/ads", [AdsController::class, "all"]);
-// Route::get("/ad/{id}", [AdsController::class, "getAd"]);
+Route::get("/ad/{id}", [AdsController::class, "refreshAd"]);
 Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad", [AdsController::class, "create"]);
 Route::delete("/ad/{id}", [AdsController::class, "delete"]);
@@ -60,3 +60,4 @@ Route::get("/reviews/{id}", [ReviewController::class, "all"]);
 Route::get("/followings/{id}", [FollowersController::class, "followings"]);
 Route::get("/followers/{id}", [FollowersController::class, "followers"]);
 Route::delete("/unfollow/{userID}/{followerID}", [FollowersController::class, "unFollow"]);
+Route::post("/follow", [FollowersController::class, "follow"]);

@@ -27,4 +27,15 @@ class FollowersController extends Controller
             return "unfollowed";
         }
     }
+    public function follow(Request $request)
+    {
+        $user = new Followers();
+        $user->user_id = $request->input("user_id");
+        $user->follower_id = $request->input("follower_id");
+        if ($user->save()) {
+            return "followed";
+        } else {
+            return "failed";
+        }
+    }
 }
