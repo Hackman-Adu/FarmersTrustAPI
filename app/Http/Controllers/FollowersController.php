@@ -12,13 +12,15 @@ class FollowersController extends Controller
 {
     public function followings($userID)
     {
-        $user = User::find($userID);
-        return response()->json(['response' => "successful", "followings" => UserResource::collection($user->followings)]);
+        $user = User::where("id", "=", $userID)->first();
+        return UserResource::collection($user->followings()->paginate(20));
     }
     public function followers($userID)
     {
-        $user = User::find($userID);
-        return response()->json(['response' => "successful", "followers" => UserResource::collection($user->followers)]);
+        $user = User::where("id", "=", $userID)->first();
+        return UserResource::collection($user->followers()->paginate(20));
+        // $user = User::find($userID);
+        // return response()->json(['response' => "successful", "followers" => UserResource::collection($user->followers)]);
     }
     public function unFollow($userID, $followerID)
     {
