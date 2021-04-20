@@ -41,6 +41,7 @@ Route::delete("/carts/{id}", [CartController::class, "deleteAll"]);
 
 //routes for ads
 Route::get("/ads", [AdsController::class, "all"]);
+Route::get("/ads/category/{category}", [AdsController::class, "getByCategory"]);
 Route::get("/ad/{id}", [AdsController::class, "refreshAd"]);
 Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad", [AdsController::class, "create"]);

@@ -14,14 +14,20 @@ class AdsController extends Controller
     //getting all ads from users
     public function all()
     {
-        $ads = Ads::where('approved', '0')->orderBy("id", "DESC")->paginate(25);
+        $ads = Ads::where('approved', '0')->orderBy("id", "DESC")->paginate(20);
+        return AdResources::collection($ads);
+    }
+    public function getByCategory($category)
+    {
+        $categories = ["productCategory" => $category, "productCategory" => $category, "productCategory" => $category, "productCategory" => $category, "productCategory" => $category];
+        $ads = Ads::where($categories)->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
 
     //getting ads from a particular user
     public function view($id)
     {
-        $ads = Ads::where("user_id", "=", $id)->orderBy("id", "DESC")->paginate(25);
+        $ads = Ads::where("user_id", "=", $id)->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
 
