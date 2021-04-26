@@ -47,6 +47,7 @@ Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad", [AdsController::class, "create"]);
 Route::delete("/ad/{id}", [AdsController::class, "delete"]);
 Route::put("/ad/{id}", [AdsController::class, "update"]);
+Route::get("/ads/search/{value}", [AdsController::class, "searchProducts"]);
 
 //ad images
 Route::post("/ad/images", [ImagesController::class, "create"]);
