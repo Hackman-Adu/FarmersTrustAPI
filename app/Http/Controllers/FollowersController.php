@@ -19,8 +19,6 @@ class FollowersController extends Controller
     {
         $user = User::where("id", "=", $userID)->first();
         return UserResource::collection($user->followers()->paginate(20));
-        // $user = User::find($userID);
-        // return response()->json(['response' => "successful", "followers" => UserResource::collection($user->followers)]);
     }
     public function unFollow($userID, $followerID)
     {

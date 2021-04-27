@@ -31,7 +31,7 @@ class AdsController extends Controller
     }
     public function getRelatedProducts($category, $name)
     {
-        $ads = Ads::where("productName", "like", '%' . $name . '%')->where("productCategory", "=", $category)->orderBy("id", "DESC")->paginate(20);
+        $ads = Ads::where("productName", "like", '%' . $name . '%')->orwhere("productCategory", "=", $category)->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
     //getting ads from a particular user
