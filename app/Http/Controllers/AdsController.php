@@ -19,19 +19,18 @@ class AdsController extends Controller
     }
     public function getByCategory($category)
     {
-        $categories = ["productCategory" => $category, "productCategory" => $category, "productCategory" => $category, "productCategory" => $category, "productCategory" => $category];
+        $categories = ["productCategory" => $category];
         $ads = Ads::where($categories)->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
     public function searchProducts($value)
     {
-
         $ads = Ads::where("productName", "like", '%' . $value . '%')->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
-    public function getRelatedProducts($category, $name)
+    public function getRelatedProducts($category, $id)
     {
-        $ads = Ads::where("productName", "like", '%' . $name . '%')->orwhere("productCategory", "=", $category)->orderBy("id", "DESC")->paginate(20);
+        $ads = Ads::where("productCategory", $category)->where("id", "<>", $id)->orderBy("id", "DESC")->paginate(20);
         return AdResources::collection($ads);
     }
     //getting ads from a particular user
