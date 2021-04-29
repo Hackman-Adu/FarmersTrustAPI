@@ -41,13 +41,13 @@ Route::delete("/carts/{id}", [CartController::class, "deleteAll"]);
 
 //routes for ads
 Route::get("/ads", [AdsController::class, "all"]);
-Route::get("/ads/category/{category}", [AdsController::class, "getByCategory"]);
+Route::get("/ads/category/{category}/{sort}", [AdsController::class, "getByCategory"]);
 Route::get("/ad/{id}", [AdsController::class, "refreshAd"]);
 Route::get("/ads/{id}", [AdsController::class, "view"]);
 Route::post("/ad", [AdsController::class, "create"]);
 Route::delete("/ad/{id}", [AdsController::class, "delete"]);
 Route::put("/ad/{id}", [AdsController::class, "update"]);
-Route::get("/ads/search/{value}", [AdsController::class, "searchProducts"]);
+Route::get("/ads/search/{value}/{category}/{sort}", [AdsController::class, "searchProducts"]);
 Route::get("/ads/related/{category}/{id}", [AdsController::class, "getRelatedProducts"]);
 
 //ad images

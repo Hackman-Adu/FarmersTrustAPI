@@ -18,7 +18,7 @@ class CreateAdsTable extends Migration
             $table->unsignedBigInteger("user_id");
             $table->string("productCategory");
             $table->string("productName");
-            $table->string("price");
+            $table->double("price");
             $table->string("location");
             $table->string("description");
             $table->string("negotiable");
