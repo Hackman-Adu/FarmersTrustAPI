@@ -8,6 +8,7 @@ use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,7 @@ Route::get("/followings/{id}", [FollowersController::class, "followings"]);
 Route::get("/followers/{id}", [FollowersController::class, "followers"]);
 Route::delete("/unfollow/{userID}/{followerID}", [FollowersController::class, "unFollow"]);
 Route::post("/follow", [FollowersController::class, "follow"]);
+
+Route::post("/reset", [PasswordResetController::class, "sendCode"]);
+Route::get("/verify/{id}", [PasswordResetController::class, "verifyCode"]);
+Route::put("/resend/{id}/{code}", [PasswordResetController::class, "resendCode"]);
