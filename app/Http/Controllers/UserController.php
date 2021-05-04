@@ -19,7 +19,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         try {
-            $user = User::select('*')->where('email', $request->input('email'))->first();
+            $user = User::select('*')->where('email', $request->input('email'))->orWhere("phone", $request->input("phone"))->first();
             if ($user) {
                 return response()->json(['response' => "account exists", "user" => $user]);
             } else {
