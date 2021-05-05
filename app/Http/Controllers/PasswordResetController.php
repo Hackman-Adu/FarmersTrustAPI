@@ -37,8 +37,6 @@ class PasswordResetController extends Controller
 
     public function sendCode(Request $request)
     {
-
-        //date('Y-m-d H:i:s')
         $reset = new passwordReset();
         $number = $request->input("number");
         $message = $request->input("message");
@@ -47,34 +45,40 @@ class PasswordResetController extends Controller
         $reset->date = date("Y-m-d H:i:s");
         if (!$reset::where("user_id", $reset->user_id)->first()) {
             if ($reset->save()) {
-                return response()->json(["message" => "successfull", "sms" => json_decode($this->sendSMS($number, $message))]);
+                return response()->json(["message" => "successful", "sms" => json_decode($this->sendSMS($number, $message))]);
+            } else {
+                return response()->json(["message" => "failed", "sms" => json_decode($this->sendSMS($number, $message))]);
             }
         } else {
-            return ($this->resendCode($reset->user_id, $reset->code));
+            return ($this->resendCode($reset->user_id, $reset->code, $number, $message));
         }
     }
 
-    public function verifyCode($id)
+
+    //verifying user's password reset code
+    public function verifyCode($id, $resetCode)
     {
-        $code = passwordReset::where("user_id", $id)->first();
-        $now = date("Y-m-d H:i:s");
-        $date = $code->date;
-        $time =   strtotime($now) - strtotime($date);
-        if ($time > 240) {
-            return response()->json(['message' => "expired", "data" => $code]);
+        $code = passwordReset::where("user_id", $id)->where("code", $resetCode)->first();
+        $today = date("Y-m-d H:i:s");
+        $resetCodeDate = $code->date;
+        $time =   strtotime($today) - strtotime($resetCodeDate);
+        if ($time > 1800) {
+            return "expired";
         } else {
-            return response()->json(['message' => "active", "data" => $code]);
+            return "active";
         }
     }
 
-    public function resendCode($id, $newCode)
+    public function resendCode($id, $newCode, $number, $message)
     {
         $code = passwordReset::where("user_id", $id)->first();
         $date = date("Y-m-d H:i:s");
         $code->date = $date;
         $code->code = $newCode;
         if ($code->save()) {
-            return response()->json(['message' => "successful", "data" => $code]);
+            return response()->json(['message' => "successful", "sms" => json_decode($this->sendSMS($number, $message))]);
+        } else {
+            return response()->json(['message' => "failed", "sms" => json_decode($this->sendSMS($number, $message))]);
         }
     }
 }
