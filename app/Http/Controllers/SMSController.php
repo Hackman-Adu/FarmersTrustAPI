@@ -10,7 +10,7 @@ class SMSController extends Controller
     {
         $private_key = '2021050498000902';
         $public_key = '085b9a34f27d6ec1';
-        $sender = 'FarmerTrust';
+        $sender = 'Farmer Trust';
         $message = rawurlencode($message);
         $url = 'http://api.msmpusher.net/v1/send';
         $data = [

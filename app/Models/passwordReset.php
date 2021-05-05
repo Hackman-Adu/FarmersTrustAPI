@@ -11,6 +11,6 @@ class passwordReset extends Model
     protected $table = "password_resets";
     public $timestamps = false;
     protected $fillable = [
-        'user_id', "code",
+        'phone', "code",
     ];
 }

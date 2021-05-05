@@ -66,6 +66,9 @@ Route::get("/followers/{id}", [FollowersController::class, "followers"]);
 Route::delete("/unfollow/{userID}/{followerID}", [FollowersController::class, "unFollow"]);
 Route::post("/follow", [FollowersController::class, "follow"]);
 
+
+
+Route::get("/phone/{number}", [PasswordResetController::class, "checkPhoneNumber"]);
 Route::post("/reset", [PasswordResetController::class, "sendCode"]);
-Route::get("/verify/{id}/{code}", [PasswordResetController::class, "verifyCode"]);
-Route::put("/resend/{id}/{code}", [PasswordResetController::class, "resendCode"]);
+Route::get("/verify/{phone}/{code}", [PasswordResetController::class, "verifyCode"]);
+Route::put("/resend/{phone}/{code}/{message}", [PasswordResetController::class, "resendCode"]);
