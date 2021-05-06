@@ -68,7 +68,9 @@ Route::post("/follow", [FollowersController::class, "follow"]);
 
 
 
-Route::get("/phone/{number}", [PasswordResetController::class, "checkPhoneNumber"]);
+//forgot password
+Route::get("/account/{number}/{email}", [PasswordResetController::class, "checkAccount"]);
 Route::post("/reset", [PasswordResetController::class, "sendCode"]);
 Route::get("/verify/{phone}/{code}", [PasswordResetController::class, "verifyCode"]);
 Route::put("/resend/{phone}/{code}/{message}", [PasswordResetController::class, "resendCode"]);
+Route::put("/password/{phone}/{password}", [PasswordResetController::class, "newPassword"]);

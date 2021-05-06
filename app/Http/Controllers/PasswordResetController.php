@@ -6,6 +6,8 @@ use App\Models\User;
 use App\Models\passwordReset;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SMSController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class PasswordResetController extends Controller
 {
@@ -27,9 +29,9 @@ class PasswordResetController extends Controller
         }
     }
 
-    public function checkPhoneNumber($phone)
+    public function checkAccount($phone, $emailAddress)
     {
-        $user = User::where("phone", $phone)->first();
+        $user = User::where("phone", $phone)->where("email", $emailAddress)->first();
         if ($user) {
             return "1";
         } else {
@@ -57,7 +59,6 @@ class PasswordResetController extends Controller
             return "000";
         }
     }
-
     public function resendCode($phone, $newCode, $message)
     {
         $code = passwordReset::where("phone", $phone)->first();
@@ -68,6 +69,20 @@ class PasswordResetController extends Controller
             return response()->json(['message' => "successful", "sms" => json_decode(SMSController::sendSMS($phone, $message))]);
         } else {
             return response()->json(['message' => "failed", "sms" => json_decode(SMSController::sendSMS($phone, $message))]);
+        }
+    }
+    public function newPassword($phone, $password)
+    {
+        try {
+            $user = User::where("phone", $phone)->first();
+            $user->user_password = Hash::make($password);
+            if ($user->save()) {
+                return "successful";
+            } else {
+                return "failed";
+            }
+        } catch (\Throwable $th) {
+            Log::error("saving password", [$th]);
         }
     }
 }

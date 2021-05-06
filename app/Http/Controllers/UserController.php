@@ -40,17 +40,21 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
-        $email = $request->input("email");
-        $password = $request->input("password");
-        $user = User::select("*")->where("email", $email)->first();
-        if ($user) {
-            if (Hash::check($password, $user->user_password)) {
-                return response()->json(["response" => "successful", "user" => new UserResource($user)]);
+        try {
+            $email = $request->input("email");
+            $password = $request->input("password");
+            $user = User::select("*")->where("email", $email)->orWhere("phone", $email)->first();
+            if ($user) {
+                if (Hash::check($password, $user->user_password)) {
+                    return response()->json(["response" => "successful", "user" => new UserResource($user)]);
+                } else {
+                    return response()->json(["response" => "wrong credentials", "user" =>  new UserResource($user)]);
+                }
             } else {
-                return response()->json(["response" => "wrong credentials", "user" =>  new UserResource($user)]);
+                return response()->json(["response" => "wrong credentials", "user" => null]);
             }
-        } else {
-            return response()->json(["response" => "wrong credentials", "user" =>  new UserResource($user)]);
+        } catch (\Throwable $th) {
+            Log::error("Failed to login", [$th]);
         }
     }
 
