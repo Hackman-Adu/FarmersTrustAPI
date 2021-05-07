@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountActivationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -74,3 +75,9 @@ Route::post("/reset", [PasswordResetController::class, "sendCode"]);
 Route::get("/verify/{phone}/{code}", [PasswordResetController::class, "verifyCode"]);
 Route::put("/resend/{phone}/{code}/{message}", [PasswordResetController::class, "resendCode"]);
 Route::put("/password/{phone}/{password}", [PasswordResetController::class, "newPassword"]);
+
+
+//account activation
+Route::post("/activate", [AccountActivationController::class, "sendActivationCode"]);
+Route::put("/activate/resend/{phone}/{code}/{message}", [AccountActivationController::class, "resendCode"]);
+Route::get("/activation/verify/{phone}/{code}", [AccountActivationController::class, "verifyCode"]);
