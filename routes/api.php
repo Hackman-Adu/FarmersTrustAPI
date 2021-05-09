@@ -10,6 +10,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ChangeNumberController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FollowersController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\PasswordResetController;
 
 /*
@@ -84,3 +85,10 @@ Route::put("/activate/resend/{phone}/{code}/{message}", [AccountActivationContro
 Route::get("/activation/verify/{phone}/{code}", [AccountActivationController::class, "verifyCode"]);
 
 Route::put("/change/phone/{id}/{phone}", [ChangeNumberController::class, "changeNumber"]);
+
+
+//orders
+Route::get("/orders/placed/{id}", [OrdersController::class, "PlacedOrders"]);
+Route::get("/orders/received/{id}", [OrdersController::class, "receivedOrders"]);
+Route::post("/order", [OrdersController::class, "newOrder"]);
+Route::post("/order/details", [OrdersController::class, "orderDetails"]);
