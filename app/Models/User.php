@@ -9,11 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = "users";
     protected $fillable = [
         "fullname",
         "email",
+        "verified",
         "phone",
         "user_password",
         "image"

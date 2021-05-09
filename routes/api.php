@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdsController;
 use App\Http\Controllers\ImagesController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChangeNumberController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\FollowersController;
 use App\Http\Controllers\PasswordResetController;
@@ -81,3 +82,5 @@ Route::put("/password/{phone}/{password}", [PasswordResetController::class, "new
 Route::post("/activate", [AccountActivationController::class, "sendActivationCode"]);
 Route::put("/activate/resend/{phone}/{code}/{message}", [AccountActivationController::class, "resendCode"]);
 Route::get("/activation/verify/{phone}/{code}", [AccountActivationController::class, "verifyCode"]);
+
+Route::put("/change/phone/{id}/{phone}", [ChangeNumberController::class, "changeNumber"]);

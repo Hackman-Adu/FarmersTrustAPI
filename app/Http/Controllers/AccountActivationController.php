@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\SMSController;
 use App\Models\account_activation;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AccountActivationController extends Controller
@@ -36,8 +37,9 @@ class AccountActivationController extends Controller
                 //expired
                 return "100";
             } else {
-                //active.....update user account later
-                return "111";
+                if (User::where("phone", $phone)->update(array("verified" => 1))) {
+                    return "111";
+                }
             }
         } else {
             //does not exist

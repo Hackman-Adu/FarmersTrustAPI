@@ -24,6 +24,7 @@ class UserController extends Controller
                 return response()->json(['response' => "account exists", "user" => $user]);
             } else {
                 $user = new User();
+                $user->verified = 0;
                 $user->fullname = $request->input("fullname");
                 $user->email = $request->input("email");
                 $user->phone = $request->input("phone");
