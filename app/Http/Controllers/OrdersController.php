@@ -7,6 +7,7 @@ use App\Http\Resources\OrdersResources;
 use App\Models\OrderDetails;
 use App\Models\orders;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OrdersController extends Controller
 {
@@ -17,18 +18,22 @@ class OrdersController extends Controller
         $order->seller_id = $request->input("seller_id");
         $order->ad_id = $request->input("ad_id");
         if ($order->save()) {
-            return response()->json(["message" => "successful", "order" => new OrdersResources($order)]);
+            return $order->id;
         }
     }
     public function orderDetails(Request $request)
     {
-        $details = new OrderDetails();
-        $fields = $request->all();
-        $details->fill($fields);
-        if ($details->save()) {
-            if (orders::where("id", $request->input("order_id"))->update(array("status" => 1))) {
-                return response()->json(["message" => "successful", "order" => new OrdersResources(orders::find($request->input("order_id")))]);
+        try {
+            $details = new OrderDetails();
+            $fields = $request->all();
+            $details->fill($fields);
+            if ($details->save()) {
+                if (orders::where("id", $request->input("order_id"))->update(array("status" => 1))) {
+                    return response()->json(["message" => "successful", "order" => new OrdersResources(orders::find($request->input("order_id")))]);
+                }
             }
+        } catch (\Throwable $th) {
+            Log::error("completing ordering process", [$th]);
         }
     }
 

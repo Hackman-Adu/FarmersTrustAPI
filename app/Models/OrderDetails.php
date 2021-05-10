@@ -12,6 +12,7 @@ class OrderDetails extends Model
     public $timestamps = false;
     protected $fillable = [
         "order_id",
+        "orderNumber",
         "product",
         "total_price",
         "quantity",
