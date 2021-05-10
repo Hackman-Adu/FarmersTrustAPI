@@ -20,7 +20,7 @@ class OrdersReceivedResources extends JsonResource
             "status" => $this->status,
             "seller_id" => $this->seller_id,
             "details" => $this->orderdetails,
-            "buyer" => new UserResource($this->seller)
+            "buyer" => new UserResource($this->buyer)
         ];
     }
 }
