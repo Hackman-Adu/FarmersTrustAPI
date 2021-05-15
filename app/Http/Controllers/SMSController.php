@@ -34,6 +34,7 @@ class SMSController extends Controller
             $response = curl_exec($curl);
             curl_close($curl);
             Log::info("SMS Response", [$response]);
+            Log::info("SMS PAYLOAD", [$data]);
             return $response;
         } catch (\Throwable $th) {
             Log::error("Error in sending SMS", [$th]);
