@@ -19,7 +19,7 @@ class OrdersResources extends JsonResource
             "date" => $this->created_at,
             "status" => $this->status,
             "buyer_id" => $this->buyer_id,
-            "details" => $this->orderdetails,
+            "details" => new OrderDetailsResources($this->orderdetails),
             "seller" => new UserResource($this->seller)
         ];
     }

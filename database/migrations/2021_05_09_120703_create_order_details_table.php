@@ -24,6 +24,7 @@ class CreateOrderDetailsTable extends Migration
             $table->string("orderType");
             $table->string("location");
             $table->string("phone");
+            $table->unsignedBigInteger("rider_id")->default(0);
         });
     }
 

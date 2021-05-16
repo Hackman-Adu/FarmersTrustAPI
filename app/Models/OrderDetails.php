@@ -18,11 +18,15 @@ class OrderDetails extends Model
         "quantity",
         "orderType",
         "location",
-        "phone"
-    ];
+        "phone",
 
+    ];
     public function order()
     {
         return $this->belongsTo(orders::class);
+    }
+    public function rider()
+    {
+        return $this->belongsTo(Riders::class);
     }
 }
